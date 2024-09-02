@@ -27,4 +27,24 @@ app.use("/api/v1/organization" , organizationRoutes);
 const domainRoutes = require("./routes/domain.routes");
 app.use("/api/v1/domain" , domainRoutes);
 
+//jobType-routes
+const jobTypeRoutes = require("./routes/jobType.routes");
+app.use("/api/v1/domain" , jobTypeRoutes);
+
+//post-job routes
+const postJobRoutes = require("./routes/postjob.routes");
+app.use("/api/v1/domain" , postJobRoutes);
+
+//profile-routes
+const profileRoutes = require("./routes/profile.routes");
+app.use("/api/v1/domain" , profileRoutes);
+
+//saveJob-routes
+const saveJobRoutes = require("./routes/saveJob.routes");
+app.use("/api/v1/domain" , saveJobRoutes);
+
+//Application-routes
+const applicationRoutes = require("./routes/application.routes");
+app.use("/api/v1/domain" , applicationRoutes);
+
 module.exports = app;
