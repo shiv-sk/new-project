@@ -11,19 +11,7 @@ const uploadOnCloudinary = async (localpath)=>{
             return null;
         }
         const uploadMedia = await cloudinary.uploader.upload(localpath , {resource_type:"auto"});
-        uploadMedia.url(uploadMedia.public_id , {
-            transformation:[
-                {
-                    quality:"auto",
-                    fetch_format:"auto"
-                },
-                {
-                    width:"500",
-                    gravity:"auto",
-                    crop:"fill"
-                }
-            ]
-        })
+        // console.log("public_id of the cloudinary " , uploadMedia.public_id);
         fs.unlinkSync(localpath);
         return uploadMedia;
     } catch (error) {

@@ -29,22 +29,22 @@ app.use("/api/v1/domain" , domainRoutes);
 
 //jobType-routes
 const jobTypeRoutes = require("./routes/jobType.routes");
-app.use("/api/v1/domain" , jobTypeRoutes);
+app.use("/api/v1/jobType" , jobTypeRoutes);
 
 //post-job routes
 const postJobRoutes = require("./routes/postjob.routes");
-app.use("/api/v1/domain" , postJobRoutes);
+app.use("/api/v1/postJob" , postJobRoutes);
 
 //profile-routes
 const profileRoutes = require("./routes/profile.routes");
-app.use("/api/v1/domain" , profileRoutes);
+app.use("/api/v1/profile" , profileRoutes);
 
 //saveJob-routes
 const saveJobRoutes = require("./routes/saveJob.routes");
-app.use("/api/v1/domain" , saveJobRoutes);
+app.use("/api/v1/saveJob" , saveJobRoutes);
 
 //Application-routes
 const applicationRoutes = require("./routes/application.routes");
-app.use("/api/v1/domain" , applicationRoutes);
+app.use("/api/v1/application" , applicationRoutes);
 
 module.exports = app;

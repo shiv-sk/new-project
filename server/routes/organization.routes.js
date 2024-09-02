@@ -9,12 +9,12 @@ Router.route("/").get(organizationController.getAllOrganization);
 
 Router.route("/:organizationId")
 .get(AuthMiddleware, organizationController.getOrganization)
-.patch(AuthMiddleware, organizationController.updateOrganization)
+.patch( AuthMiddleware, fileMiddleware ,  organizationController.updateOrganization)
 .delete(AuthMiddleware, organizationController.deleteOrganization);
 
 Router.route("/user/:user")
 .get(AuthMiddleware, organizationController.getOrganization)
-.patch(AuthMiddleware, organizationController.updateOrganization)
+.patch(fileMiddleware , AuthMiddleware, organizationController.updateOrganization)
 .delete(AuthMiddleware, organizationController.deleteOrganization);
 
 module.exports = Router;

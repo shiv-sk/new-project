@@ -4,11 +4,12 @@ const ApiError = require("../utils/apiError");
 const ApiResponse = require("../utils/apiResponse");
 const User = require("../models/user.model");
 const uploadOnCloudinary = require("../utils/cloudinary");
+const Cloudinary = require("cloudinary").v2
 
 //new organization
 exports.newOrganization = asyncHandler(async (req,res)=>{
-    const {description , companySize , website , email , user} = req.body;
-    if(!(description && companySize && website && email && user)){
+    const {name, about , companySize , website , email , user} = req.body;
+    if(!(name && about && companySize && website && email && user)){
         throw new ApiError(400 , "all fields are required");
     }
     const existOrganization = await User.findOne({email});
@@ -23,12 +24,30 @@ exports.newOrganization = asyncHandler(async (req,res)=>{
     if(!cloudinaryUpload){
         throw new ApiError(500, "File upload failed");
     }
+    const optimizedUrl = Cloudinary.url(cloudinaryUpload.public_id , {
+        transformation:[
+            {
+                quality:"auto",
+                fetch_format:"auto"
+            },
+            {
+                width:"150",
+                gravity:"auto",
+                crop:"fill"
+            }
+        ]
+    })
+    if(!optimizedUrl){
+        throw new ApiError(500 , "url is not optimized");
+    }
+    // console.log("the optimized url for the media: " , optimizedUrl)
     const organization = await Organization.create({
-        description,
+        name,
+        about,
         companySize,
         website,
         email,
-        logo:cloudinaryUpload.url,
+        logo:optimizedUrl,
         user
     })
     if(!organization){
@@ -43,7 +62,8 @@ exports.newOrganization = asyncHandler(async (req,res)=>{
 exports.getOrganization = asyncHandler(async(req,res)=>{
     const {role} = req.user;
     const {organizationId} = req.params;
-    const {user} = req.user;
+    const {user} = req.params;
+    
     let organization;
     if(role === "Admin" && organizationId){
         organization = await Organization.findById(organizationId);
@@ -69,12 +89,31 @@ exports.getAllOrganization = asyncHandler(async(req,res)=>{
     )
 })
 
-//update organozation for admin
+//update organozation 
 exports.updateOrganization = asyncHandler(async(req,res)=>{
     const {role} = req.user;
     const {organizationId} = req.params;
     const {user} = req.params;
     let organization;
+    if(req.files && req.files.logo){
+        // console.log("file from the request: " , req.files);
+        const logoPath = req.files?.logo[0].path;
+        const cloudinaryUpload = await uploadOnCloudinary(logoPath);
+        const optimizedUrl = Cloudinary.url(cloudinaryUpload.public_id , {
+            transformation:[
+                {
+                    quality:"auto",
+                    fetch_format:"auto"
+                },
+                {
+                    width:"150",
+                    gravity:"auto",
+                    crop:"fill"
+                }
+            ]
+        })
+        req.body.logo = optimizedUrl;
+    }
     if(role === "Admin" && organizationId){
         organization = await Organization.findByIdAndUpdate(organizationId , req.body , {new:true , runValidators:true});
     }else if(user){

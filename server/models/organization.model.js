@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const organizationSchema = new mongoose.Schema({
-    description:{
+    name:{
+        type:String,
+        required:true,
+        trim:true,
+        lowercase:true
+    },
+    about:{
         type:String,
         required:true
     },
