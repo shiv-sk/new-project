@@ -25,7 +25,7 @@ exports.newJobType = asyncHandler(async(req,res)=>{
 })
 
 //get All jobType 
-exports.getAllJobType = asyncHandler(async()=>{
+exports.getAllJobType = asyncHandler(async(req,res)=>{
     const jobTypes = await JobType.find();
     if(jobTypes.length === 0){
         throw new ApiError(404 , "jobTypes are not found");

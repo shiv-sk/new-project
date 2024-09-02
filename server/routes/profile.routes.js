@@ -1,6 +1,8 @@
 const express = require("express");
 const Router = express.Router();
 const profileController = require("../Controllers/profile.controller");
-Router.route("/").post(profileController.newProfile);
-Router.route("/:user").get(profileController.userProfile).patch(profileController.updateProfile).delete(profileController.deleteProfile);
+const upload = require("../middleware/multer.middleware");
+const fileMiddleware = upload.fields([{name:"resume" , maxCount: 1}])
+Router.route("/").post(fileMiddleware , profileController.newProfile);
+Router.route("/:user").get(profileController.userProfile).patch(fileMiddleware, profileController.updateProfile).delete(profileController.deleteProfile);
 module.exports = Router

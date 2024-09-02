@@ -2,25 +2,42 @@ const ApiError = require("../utils/apiError");
 const asyncHandler = require("../utils/asyncHandler");
 const Profile = require("../models/profile.model");
 const ApiResponse = require("../utils/apiResponse");
-
+const Cloudinary = require("cloudinary").v2;
+const uploadOnCloudinary = require("../utils/cloudinary");
 //new Profile
 exports.newProfile = asyncHandler(async(req , res)=>{
     const {skills , education , contactInfo , gender , type , experience , user} = req.body
-    if(!(skills && education && contactInfo && gender && type && experience && user)){
+    console.log("the request body is: " , skills , education , contactInfo , gender , type , experience , user);
+    const parsedSkills = JSON.parse(skills);
+    const parsedEducation = JSON.parse(education);
+    const parsedContactInfo = JSON.parse(contactInfo);
+    const parsedExperience = JSON.parse(experience);
+    console.log("Parsed Skills:", parsedSkills);
+    if(!(parsedSkills && parsedEducation && parsedContactInfo && gender && type && parsedExperience && user)){
         throw new ApiError(400 , "all fields are required");
     }
     const existProfile = await Profile.findOne({user});
     if(existProfile){
         throw new ApiError(400 , "profile is already exist");
     }
+    const resumePath = req.files?.resume[0].path;
+    if(!resumePath){
+        throw new ApiError(400 , "resume path is required");
+    }
+    const cloudinaryUpload = await uploadOnCloudinary(resumePath);
+    if(!cloudinaryUpload){
+        throw new ApiError(500, "File upload failed");
+    }
+    
     const profile = await Profile.create({
-        skills,
-        education,
-        contactInfo,
+        skills:parsedSkills,
+        education:parsedEducation,
+        contactInfo:parsedContactInfo,
         gender,
         type,
-        experience,
-        user
+        experience:parsedExperience,
+        user,
+        resume:cloudinaryUpload.url
     })
     if(!profile){
         throw new ApiError(500 , "profile is not created");
@@ -48,6 +65,11 @@ exports.userProfile = asyncHandler(async(req,res)=>{
 //update user profile
 exports.updateProfile = asyncHandler(async(req,res)=>{
     const {user} = req.params
+    if(req.files && req.files.resume){
+        const logoPath = req.files?.logo[0].path;
+        const cloudinaryUpload = await uploadOnCloudinary(logoPath);
+        req.body.resume = cloudinaryUpload.url
+    }
     if(!user){
         throw new ApiError(400 , "user is required");
     }
