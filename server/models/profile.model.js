@@ -58,7 +58,8 @@ const profileSchema = new mongoose.Schema({
     type:{
         type:String,
         enum:["Fresher" , "Experienced"],
-        required:true
+        required:true,
+        default:"Fresher"
     },
     experience:[
         {
@@ -83,7 +84,11 @@ const profileSchema = new mongoose.Schema({
     resume:{
         type:String,
         required:true
-    }
+    },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:user
+    },
 } , {timestamps:true});
 
 const Profile = mongoose.model("Profile" , profileSchema);

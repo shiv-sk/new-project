@@ -5,7 +5,7 @@ const organizationSchema = new mongoose.Schema({
         required:true
     },
     companySize:{
-        type:Number,
+        type:String,
         required:true,
     },
     website:{

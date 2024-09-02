@@ -19,7 +19,8 @@ const postJobSchema = new mongoose.Schema({
     salary:{
         type:Number,
         required:true,
-        default:0
+        default:0,
+        min:0
     },
     location:{
         type:String,
@@ -35,6 +36,11 @@ const postJobSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    experience:{
+        type:String,
+        required:true,
+        default:"0 - 1"
+    },
     organization:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Organization",
@@ -43,6 +49,11 @@ const postJobSchema = new mongoose.Schema({
     jobType:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"JobType",
+        required:true
+    },
+    domain:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Domain",
         required:true
     }
 } , {timeStamps:true});

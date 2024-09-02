@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet } from "react-router-dom"
+import Navbar from "./component/Navbar"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>the project</h1>
+      <Navbar/>
+      <Outlet/>
     </>
   )
 }
 
 export default App
+library.add(fab, fas, far)
