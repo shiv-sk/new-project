@@ -56,10 +56,10 @@ export default function Home(){
 
             <div>
             <ul className="md:flex font-semibold">
-                    <li className="mx-[10px]">Domain-1</li>
-                    <li className="mx-[10px]">Domain-1</li>
-                    <li className="mx-[10px]">Domain-1</li>
-                    <li className="mx-[10px]">Domain-1</li>
+                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
+                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
+                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
+                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
             </ul>
             </div>
         </section>
