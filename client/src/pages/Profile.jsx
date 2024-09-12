@@ -1,6 +1,7 @@
 export default function Profile(){
     return (
         <form className="max-w-lg mx-auto p-6  shadow-md rounded-md mt-8">
+            <h5 className="text-center font-bold text-2xl ">Make Your Profile</h5>
             {/* Skills Section */}
             <div className="mb-6">
                 <label className="text-left block font-medium mb-2">Skills</label>

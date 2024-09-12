@@ -1,68 +1,67 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState } from "react"
+
 export default function Home(){
+    const [salary , setSalary] = useState(0);
+    const handleSalary = (e)=>{
+        setSalary(e.target.value);
+    }
+    console.log("the selected salary is: " , salary);
     return (
-        <>
-        {/* section----------1 */}
-        <section className="flex flex-wrap w-full h-auto items-center text-center flex-col p-10">
-            <div className="flex flex-wrap flex-col h-auto w-full items-center mb-4">
-                <p className="text-center text-white text-2xl">Make Your Dream Into Reality</p>
-                <div className="border-b-2 border-orange-500 rounded-lg w-20 mt-2 mb-2"></div>
+        <section className="">
+            {/* search---bar */}
+            <div className="flex justify-center text-center mt-6">
+                <input type="text" placeholder="search" className="outline-none px-6 py-4 bg-slate-700 mx-4 my-4 "/>
+                <button type="button" className="bg-orange-600 hover:transition-colors hover:bg-orange-700 cursor-pointer md:px-6 
+                px-3 py-4 rounded my-4">search</button>
             </div>
-            <div className="w-full flex flex-wrap justify-evenly mt-2 rounded py-5">
-                <div className="w-46 flex-col items-center mb-2">
-                    <FontAwesomeIcon icon="fa-regular fa-font-awesome"  className="text-2xl mb-2"/>
-                    <p className="text-2xl font-bold mb-2">Types Of Jobs</p>
-                    <p className="mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br />
-                        Illum, consequatur?</p>
+            {/* filter and job card */}
+            <div className="flex flex-col md:flex-row justify-center mx-4 md:mx-10">
+                {/* left filter section */}
+                <aside className="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h2 className="text-center font-bold text-2xl">Filters</h2>
+                    <div className="mb-6">
+                        <h5 className="font-semibold text-lg">Salary</h5>
+                        <input type="range" min={0} max={100000} className="w-full outline-none" value={salary} onChange={handleSalary}/>
+                            <div className="flex justify-between text-sm ">
+                                <span>$0</span>
+                                <span>$100</span>
+                            </div>
+                        </div>
+                    <div>
+                        <h5 className="text-lg font-semibold ">Type</h5>
+                        <select className="w-full px-6 py-4 outline-none bg-slate-700">
+                            <option>FullTime</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h5 className="text-lg font-semibold">Locaton</h5>
+                        {/* <input type="text"  className="bg-slate-700 outline-none px-6 py-4 "/> */}
+                        <select className="bg-slate-700 outline-none px-6 py-4 w-full">
+                            <option>option 1</option>
+                        </select>
                 </div>
+                </aside>
 
-                <div className="w-46 flex-col items-center mb-2">
-                    <FontAwesomeIcon icon="fa-regular fa-user"  className="text-2xl mb-2"/>
-                    <p className="text-2xl font-bold mb-2">Fresher/Experienced</p>
-                    <p className="mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br />
-                        Illum, consequatur?</p>
-                </div>
-
-                <div className="w-46 flex-col items-center mb-2">
-                    <FontAwesomeIcon icon="fa-regular fa-envelope-open"  className="text-2xl mb-2"/>
-                    <p className="text-2xl font-bold mb-2">World-Wide Support</p>
-                    <p className="mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> 
-                        Illum, consequatur?</p>
+                <div className="w-full md:w-2/4 flex justify-center mt-16 shadow-xl">
+                    <div className="border-2 w-full max-w-screen-sm max-h-56 px-6 py-4 bg-slate-700 rounded-md">
+                        <div className="w-full">
+                            <h5 className="text-lg font-bold mb-2">title of job</h5>
+                            <h6 className="text-sm mb-4">name of the organization</h6>
+                            {/* <div className="my-5 flex text-sm"> */}
+                                <span className="mr-2 my-4 mb-4">duration</span>
+                                <span className="mr-2 p-4 my-4 mb-4">location</span>
+                                <span className="mr-2 p-4 my-4 mb-4">type</span>
+                            {/* </div> */}
+                            <button className="bg-orange-500 hover:bg-orange-700 hover:transition-colors px-6 py-2 rounded-md block mt-6">
+                                More</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {/* <slectA />   */}
+            
+            
+            
         </section>
-
-        {/* section---------2 */}
-        <section className="flex flex-wrap w-full h-auto items-center text-center flex-col p-10 b-2 hidden md:block">
-            <div className="flex flex-wrap flex-col h-auto w-full items-center mb-2">
-                <p className="text-2xl mb-2">Start Your Carrer With Job-Dashboard</p>
-                <div className="w-20 border-b-2 border-orange-500 mb-2"></div>
-            </div>
-            <div className="flex w-full h-auto items-center">
-                <img src="https://images.pexels.com/photos/4348403/pexels-photo-4348403.jpeg?auto=compress&cs=tinysrgb&w=600" className="w-[500px] h-auto mr-4 object-cover max-h-80 max-w-full" alt="" />
-                <div className="">
-                <p className= "flex-1">Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br /> Reprehenderit dolore harum ad consequatur, obcaecati cum eius ab corporis ipsam iusto deserunt molestiae aperiam ea optio?</p>
-                </div>
-                
-            </div>
-        </section>
-
-        {/* section---------3 */}
-        <section className=" px-5 py-10 flex flex-wrap flex-col justify-center items-center">
-            <div className="flex flex-wrap w-full flex-col h-auto font-bold justify-center mb-3 items-center rounded ">
-                <p className="mb-2">CheckOut Domains</p>
-                <div className="border-b-2 border-orange-500 w-20"></div>
-            </div>
-
-            <div>
-            <ul className="md:flex font-semibold">
-                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
-                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
-                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
-                    <li className="mx-[10px] hover:cursor-pointer hover:bg-orange-500 hover:ease-in-out hover:transition-shadow px-3 py-2 hover:rounded">Domain-1</li>
-            </ul>
-            </div>
-        </section>
-        </>
     )
 }

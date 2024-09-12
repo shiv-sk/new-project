@@ -4,7 +4,8 @@ export const getReq = async(url)=>{
     try {
         const response = await axios({
             method:"get",
-            url
+            url,
+            withCredentials:true,
         })
         return response.data;
     } catch (error) {

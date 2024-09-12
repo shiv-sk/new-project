@@ -6,6 +6,7 @@ exports.AuthMiddleware = async (req,res,next)=>{
     try {
         const token = req.cookies?.accessToken || req.headers["Authorization"]?.replace("Bearer " , "");
         // console.log("the token from middleware function: " , token);
+        // console.log("the token from middleware function-cookies: " , req.cookies?.accessToken);
         if(!token){
             return res.status(401).json({
                 status:"fail",

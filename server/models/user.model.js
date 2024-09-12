@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:["Student" , "Employer" , "Admin"],
-        default:"Student",
+        enum:["JobSeeker" , "Employer" , "Admin"],
+        default:"JobSeeker",
         required:true
     }
 } , {timestamps:true});

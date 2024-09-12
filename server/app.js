@@ -1,8 +1,19 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const allowedOrigins = [];
-const corsOption = {};
+const allowedOrigins = ["http://localhost:5173"];
+const corsOption = {
+    origin:function(origin , callback){
+        if(!origin || allowedOrigins.includes(origin)){
+            callback(null , true);
+        }
+        else{
+            console.log("blocked by origin: " , origin)
+        }
+    },
+    credentials:true,
+    optionsSuccessStatus: 200
+};
 const cookieParser = require("cookie-parser");
 
 //configuration

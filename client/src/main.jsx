@@ -11,11 +11,14 @@ import Organization from './pages/Organizatiom.jsx'
 import PostingJob from './pages/PostingJob.jsx'
 import Profile from './pages/Profile.jsx'
 import JobDetail from './pages/JobDetail.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
+import ErrorPage from './pages/ErrorPage.jsx'
 
 const router = createBrowserRouter([
   {
     path:"/",
     element:<App/>,
+    errorElement:<ErrorPage/>,
     children:[
       {
         path:"",
@@ -34,8 +37,16 @@ const router = createBrowserRouter([
         element:<ContineousPage/>
       },
       {
+        path:"organization/:user",
+        element:<Organization/>
+      },
+      {
         path:"organization",
         element:<Organization/>
+      },
+      {
+        path:"postJob/:organization",
+        element:<PostingJob/>
       },
       {
         path:"postJob",
@@ -43,6 +54,10 @@ const router = createBrowserRouter([
       },
       {
         path:"profile",
+        element:<Profile/>
+      },
+      {
+        path:"profile/:user",
         element:<Profile/>
       },
       {
@@ -54,8 +69,10 @@ const router = createBrowserRouter([
 ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}>
-    <App />
-    </RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )

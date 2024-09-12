@@ -12,7 +12,7 @@ Router.route("/:organizationId")
 .patch( AuthMiddleware, fileMiddleware ,  organizationController.updateOrganization)
 .delete(AuthMiddleware, organizationController.deleteOrganization);
 
-Router.route("/user/:user")
+Router.route("/user/:userId")
 .get(AuthMiddleware, organizationController.getOrganization)
 .patch(fileMiddleware , AuthMiddleware, organizationController.updateOrganization)
 .delete(AuthMiddleware, organizationController.deleteOrganization);

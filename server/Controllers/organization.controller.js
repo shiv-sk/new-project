@@ -62,13 +62,13 @@ exports.newOrganization = asyncHandler(async (req,res)=>{
 exports.getOrganization = asyncHandler(async(req,res)=>{
     const {role} = req.user;
     const {organizationId} = req.params;
-    const {user} = req.params;
+    const {userId} = req.params;
     
     let organization;
     if(role === "Admin" && organizationId){
         organization = await Organization.findById(organizationId);
-    }else if(user){
-        organization = await Organization.findOne({user});
+    }else if(userId){
+        organization = await Organization.findOne({user:userId});
     }
     if(!organization){
         throw new ApiError(404 , "organization is not found");

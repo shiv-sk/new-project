@@ -12,8 +12,8 @@ const Token = (user)=>{
     }
 }
 exports.register = asyncHandler(async (req,res)=>{
-    const {name , email , password} = req.body;
-    if(!(name && email && password)){
+    const {name , email , password , role} = req.body;
+    if(!(name && email && password && role)){
         throw new ApiError(400 , "all fields are required");
     }
     const existUser = await User.findOne({$or:[{email} , {name}]});
@@ -23,7 +23,8 @@ exports.register = asyncHandler(async (req,res)=>{
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        role
     })
     if(!user){
         throw new ApiError(500 , "user is not created");
