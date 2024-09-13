@@ -2,10 +2,12 @@ const ApiError = require("../utils/apiError");
 const asyncHandler = require("../utils/asyncHandler");
 const Application = require("../models/application.model");
 const ApiResponse = require("../utils/apiResponse");
+const confirmationMail = require("../utils/mailSending");
 
 //new Application
 exports.newApplication = asyncHandler(async(req,res)=>{
     const { profile , user , post } = req.body
+    console.log("the request body is: " , profile , user , post);
     if(!(profile && user && post)){
         throw new ApiError(400 , "all fields are required")
     }
@@ -21,6 +23,17 @@ exports.newApplication = asyncHandler(async(req,res)=>{
     if(!application){
         throw new ApiError(500 , "application is not created");
     }
+    const populateApplication = await Application.findById(application._id).populate([{path:"user" , select:"email"} , {path:"post" , select:"title" , populate:{path:"organization" , select:"email"}} , {path:"profile" , select:"resume"}]);
+    let userEmail , organizationMail , JobTitle , userResume;
+    if(populateApplication){
+        userEmail = populateApplication.user.email;
+        organizationMail = populateApplication.post.organization.email;
+        JobTitle = populateApplication.post.title;
+        userResume = populateApplication.profile.resume;
+    }
+    console.log("the populated result is: " ,  userEmail , organizationMail , JobTitle , userResume);
+    const sentMail = await confirmationMail.sendConfirmationMail(userEmail , organizationMail , JobTitle ,  userResume);
+    
     return res.status(201).json(
         new ApiResponse("Application is: " , application , 201)
     )

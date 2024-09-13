@@ -24,7 +24,7 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li onClick={() => scrollToTop()}><a href="#" className="text-white hover:text-white">About</a></li>
                 <li><a href="#offers" className="text-white hover:text-white">Services</a></li>
-                <li><a href="/blog" className="text-white hover:text-white">Blog</a></li>
+                <li><a href="#" className="text-white hover:text-white">Blog</a></li>
               </ul>
             </div>
             <div className="mb-8 md:mb-0">
@@ -38,9 +38,9 @@ const Footer = () => {
             <div>
               <p className="font-bold mb-4">Channels</p>
               <ul className="space-y-2">
-                <li><a href="/" className="text-white hover:text-white">Careers</a></li>
-                <li><a href="/" className="text-white hover:text-white">Contact</a></li>
-                <li><a href="/" className="text-white hover:text-white">Support</a></li>
+                <li><a href="#" className="text-white hover:text-white">Careers</a></li>
+                <li><a href="#" className="text-white hover:text-white">Contact</a></li>
+                <li><a href="#" className="text-white hover:text-white">Support</a></li>
               </ul>
             </div>
           </div>

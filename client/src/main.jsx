@@ -13,6 +13,7 @@ import Profile from './pages/Profile.jsx'
 import JobDetail from './pages/JobDetail.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
+import AdminDashboard from './pages/AdminDashboard.jsx'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,17 @@ const router = createBrowserRouter([
       {
         path:"JobDetail",
         element:<JobDetail/>
+      }
+    ]
+  },
+  {
+    path:"/admin",
+    element:<App/>,
+    errorElement:<ErrorPage/>,
+    children:[
+      {
+        path:"",
+        element:<AdminDashboard/>
       }
     ]
   }

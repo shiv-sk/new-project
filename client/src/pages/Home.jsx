@@ -5,7 +5,7 @@ export default function Home(){
     const handleSalary = (e)=>{
         setSalary(e.target.value);
     }
-    console.log("the selected salary is: " , salary);
+    // console.log("the selected salary is: " , salary);
     return (
         <section className="">
             {/* search---bar */}
