@@ -6,7 +6,7 @@ exports.sendConfirmationMail = async(userEmail , organizationMail , jobTitle , u
         service: "gmail",
         auth: {
             user:process.env.USER, // your Gmail email
-            pass: "hpvj rksx jwmi ytmo" // the 16-character app password generated
+            pass:process.env.PASS // the 16-character app password generated
         }
     });
     
@@ -19,7 +19,7 @@ exports.sendConfirmationMail = async(userEmail , organizationMail , jobTitle , u
     let resumeBuffer;
     try {
         resumeBuffer = await fetchFile(userResume);
-        console.log("the resume is: " , resumeBuffer);
+        // console.log("the resume is: " , resumeBuffer);
     } catch (error) {
         console.log("error while fetching resume: " , error);
         throw error;
@@ -42,14 +42,14 @@ exports.sendConfirmationMail = async(userEmail , organizationMail , jobTitle , u
 
    try {
     const userInfo = await transport.sendMail(userMailOptions);
-    console.log("User confirmation email sent: ", userInfo);
+    // console.log("User confirmation email sent: ", userInfo);
    } catch (error) {
     console.error("Error sending user confirmation email: ", error);
    }
 
    try {
     const orgInfo = await transport.sendMail(organizationMailOptions);
-    console.log("Organization notification email sent: ", orgInfo);
+    // console.log("Organization notification email sent: ", orgInfo);
    } catch (error) {
     console.error("Error sending organization notification email: ", error);
    }
