@@ -28,7 +28,8 @@ exports.sendConfirmationMail = async(userEmail , organizationMail , jobTitle , u
         from:"natsudragneel771990@gmail.com",
         to:organizationMail,
         subject:`new application is received `,
-        text:`you have received the new job application for the job ${jobTitle} and resume attached of the applied user`,
+        text:`you have received the new job application for the job ${jobTitle}`,
+        html:"<h1>applied user resume is</h1>",
         attachments:[
             {
                 filename:"resume.pdf",
