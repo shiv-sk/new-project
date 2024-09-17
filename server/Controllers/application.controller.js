@@ -69,6 +69,18 @@ exports.getAllApplication = asyncHandler(async(req,res)=>{
     )
 })
 
+//get user a specified applications
+exports.getUserApplications = asyncHandler(async(req,res)=>{
+    const {userId} = req.user;
+    const applications = await Application.find({user:userId});
+    if(!applications){
+        throw new ApiError(404 , "applications are not found");
+    }
+    return res.status(200).json(
+        new ApiResponse("applications are: " , applications , 200 , success)
+    )
+})
+
 //update Application
 exports.updateApplication = asyncHandler(async(req,res)=>{
     const {role} = req.user

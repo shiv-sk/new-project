@@ -14,6 +14,8 @@ import JobDetail from './pages/JobDetail.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
+import { OrgProvider } from './context/OrganizationContext.jsx'
+import { ProfileProvider } from './context/ProfileContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -82,9 +84,13 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
+      <OrgProvider>
+        <ProfileProvider>
       <RouterProvider router={router}>
         <App />
       </RouterProvider>
+      </ProfileProvider>
+      </OrgProvider>
     </AuthProvider>
   </StrictMode>,
 )

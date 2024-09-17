@@ -9,7 +9,7 @@ Router.route("/:JobPostId")
 .patch(AuthMiddleware , PostJobController.updateJobPost)
 .delete(AuthMiddleware , PostJobController.deleteJobPost);
 
-Router.route("organization/:organization")
+Router.route("/organization/:organizationId")
 .get(AuthMiddleware , PostJobController.getJobPost)
 .patch(AuthMiddleware , PostJobController.updateJobPost)
 .delete(AuthMiddleware , PostJobController.deleteJobPost);

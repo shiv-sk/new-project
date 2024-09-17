@@ -6,26 +6,26 @@ import { useAuth } from "../context/AuthContext";
 export default function Organization (){
     const [organizationData , setOrganizationData] = useState(null);
     console.log("localstate of the orgnization: " , organizationData)
-    const {userId} = useParams();
-    const {user} = useAuth();
-    console.log("the param user: " , user);
-    useEffect(()=>{
-        setOrganizationData(null);
-        if(user){
-            const fetchOrganization = async()=>{
-                try {
-                    const response = await getReq(`${baseurl}/organization/user/${user?._id}`);
-                    console.log("the response from the fetchOrgnization: " , response);
-                    setOrganizationData(response.data);
-                } catch (error) {
-                    console.log("error from the fetchOrgnization: " , error);
-                }
+    // const {userId} = useParams();
+    // const {user} = useAuth();
+    // console.log("the param user: " , user);
+    // useEffect(()=>{
+    //     setOrganizationData(null);
+    //     if(user){
+    //         const fetchOrganization = async()=>{
+    //             try {
+    //                 const response = await getReq(`${baseurl}/organization/user/${user?._id}`);
+    //                 console.log("the response from the fetchOrgnization: " , response);
+    //                 setOrganizationData(response.data);
+    //             } catch (error) {
+    //                 console.log("error from the fetchOrgnization: " , error);
+    //             }
                 
-            }
-            fetchOrganization();
-        }
+    //         }
+    //         fetchOrganization();
+    //     }
         
-    } , [user])
+    // } , [user])
     return organizationData ? "there is a orgnization for this user" : (
         <>
         

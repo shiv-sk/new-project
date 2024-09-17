@@ -63,11 +63,11 @@ exports.getOrganization = asyncHandler(async(req,res)=>{
     const {role} = req.user;
     const {organizationId} = req.params;
     const {userId} = req.params;
-    
+    console.log("role of the user: " , role);
     let organization;
     if(role === "Admin" && organizationId){
         organization = await Organization.findById(organizationId);
-    }else if(userId){
+    }else if(userId && role === "Employer"){
         organization = await Organization.findOne({user:userId});
     }
     if(!organization){

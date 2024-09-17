@@ -5,7 +5,7 @@ const {AuthMiddleware} = require("../middleware/auth.middleware");
 Router.route("/").post(applicationController.newApplication);
 Router.route("/").get(applicationController.getAllApplication);
 
-Router.route("/user/:user")
+Router.route("/user/:userId")
 .get(AuthMiddleware , applicationController.getApplication)
 .patch(AuthMiddleware , applicationController.updateApplication)
 .delete(AuthMiddleware , applicationController.deleteApplication);

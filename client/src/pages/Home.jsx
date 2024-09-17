@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useOrg } from "../context/OrganizationContext";
 
 export default function Home(){
     const [salary , setSalary] = useState(0);
@@ -6,6 +7,11 @@ export default function Home(){
         setSalary(e.target.value);
     }
     // console.log("the selected salary is: " , salary);
+    const {fetchOrganization} = useOrg();
+    useEffect(()=>{
+        fetchOrganization();
+    } , [fetchOrganization])
+    
     return (
         <section className="">
             {/* search---bar */}
@@ -34,7 +40,7 @@ export default function Home(){
                         </select>
                     </div>
                     <div>
-                        <h5 className="text-lg font-semibold">Locaton</h5>
+                        <h5 className="text-lg font-semibold">Location</h5>
                         {/* <input type="text"  className="bg-slate-700 outline-none px-6 py-4 "/> */}
                         <select className="bg-slate-700 outline-none px-6 py-4 w-full">
                             <option>option 1</option>
