@@ -49,13 +49,13 @@ exports.newProfile = asyncHandler(async(req , res)=>{
 
 //get profile user profile
 exports.userProfile = asyncHandler(async(req,res)=>{
-    const {user} = req.params
-    if(!user){
+    const {userId} = req.params
+    if(!userId){
         throw new ApiError(400 , "user is required");
     }
-    const profile = await Profile.findOne({user});
+    const profile = await Profile.findOne({user:userId});
     if(!profile){
-        throw new ApiError(404 , "user not found");
+        throw new ApiError(404 , "profile not found");
     }
     return res.status(200).json(
         new ApiResponse("user profile is " , profile , 200)

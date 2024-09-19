@@ -11,7 +11,7 @@ export default function Home(){
     useEffect(()=>{
         fetchOrganization();
     } , [fetchOrganization])
-    
+     
     return (
         <section className="">
             {/* search---bar */}

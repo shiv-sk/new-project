@@ -1,4 +1,7 @@
+import { useProfile } from "../context/ProfileContext"
 export default function Profile(){
+    const {profile} = useProfile();
+    console.log("response form profile page: " , profile)
     return (
         <form className="max-w-lg mx-auto p-6  shadow-md rounded-md mt-8">
             <h5 className="text-center font-bold text-2xl ">Make Your Profile</h5>
@@ -63,7 +66,7 @@ export default function Profile(){
             </div>
             {/* experience */}
             <div className="mb-6">
-                <label className="text-left block mb-2 font-medium">Experience</label>
+                <label className="text-left block mb-2 font-medium">Experience(Optional)</label>
                 <div className="space-y-6 mb-4">
                     <input type="text" placeholder="OrganizationName" className="w-full outline-none py-4 px-6 bg-slate-600 rounded-md"/>
                 </div>

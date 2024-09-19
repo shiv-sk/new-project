@@ -24,6 +24,8 @@ const OrgProvider = ({children})=>{
     useEffect(()=>{
         if(user && user.role === "Employer"){
             setUserId(user._id);
+        }else{
+            setUserId(null);
         }
     } , [user]);
 
@@ -50,6 +52,8 @@ const OrgProvider = ({children})=>{
             setIsLoading(true);
             const response = await getReq(`${baseurl}/organization/user/${userId}`);
             console.log("the reponse form the request is for organozations is: " , response);
+            setOrganization(response.data);
+            // console.log("the orgnization is from context state: " , response.data);
         } catch (error) {
             setIsError(error);
             console.log("error form the organization context: " , error);
@@ -57,6 +61,9 @@ const OrgProvider = ({children})=>{
             setIsLoading(false);
         }
     } , [setIsError , setIsLoading , userId]);
+    useEffect(()=>{
+        fetchOrganization();
+    } , [fetchOrganization])
 
     //get all orgnizations
     const fetchAllOrgnization = useCallback(async()=>{

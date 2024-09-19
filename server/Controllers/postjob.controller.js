@@ -38,7 +38,7 @@ exports.getJobPost = asyncHandler(async(req,res)=>{
     if(role === "Admin" && JobPostId){
         jobPost = await PostJob.findById(JobPostId)
     }else if(organization){
-        jobPost = await PostJob.findOne({organization})
+        jobPost = await PostJob.find({organization})
     }
     if(!jobPost){
         throw new ApiError(404 , "job posts are not found");

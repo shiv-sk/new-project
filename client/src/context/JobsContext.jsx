@@ -14,6 +14,7 @@ const JobContext = createContext({
     updateJob:()=>{},
     deleteJob:()=>{},
     fetchJobsByFilters:()=>{},
+    fetchJobsByOrganization:()=>{},
     newJob:()=>{}
 })
 

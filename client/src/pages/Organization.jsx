@@ -1,31 +1,20 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
-import { baseurl, getReq } from "../utils/apiCalls";
-import { useAuth } from "../context/AuthContext";
-
+import { useOrg } from "../context/OrganizationContext";
 export default function Organization (){
     const [organizationData , setOrganizationData] = useState(null);
-    console.log("localstate of the orgnization: " , organizationData)
-    // const {userId} = useParams();
-    // const {user} = useAuth();
-    // console.log("the param user: " , user);
+    const {organization} = useOrg();
+    
+    useEffect(()=>{
+        organization ? setOrganizationData(organization) : null;
+        console.log("the organization data is from page: " , organization);
+    } , [organization]);
+    
+    
     // useEffect(()=>{
-    //     setOrganizationData(null);
-    //     if(user){
-    //         const fetchOrganization = async()=>{
-    //             try {
-    //                 const response = await getReq(`${baseurl}/organization/user/${user?._id}`);
-    //                 console.log("the response from the fetchOrgnization: " , response);
-    //                 setOrganizationData(response.data);
-    //             } catch (error) {
-    //                 console.log("error from the fetchOrgnization: " , error);
-    //             }
-                
-    //         }
-    //         fetchOrganization();
-    //     }
-        
-    // } , [user])
+    //     fetchOrganization();
+    // } , [fetchOrganization]);
+    console.log("the organization data is from page: " , organizationData);
+    
     return organizationData ? "there is a orgnization for this user" : (
         <>
         

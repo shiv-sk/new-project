@@ -33,7 +33,7 @@ const ProfileProvider = ({children})=>{
         }
     } , [user])
 
-    
+    console.log("user from auth context: " , userId);
     //new profile of a user
     const newProfile = useCallback(async(data)=>{
         try {
@@ -55,8 +55,9 @@ const ProfileProvider = ({children})=>{
         }
         try {
             setIsLoading(true);
-            const response = await getReq(`${baseurl}/profile/${userId}`);
+            const response = await getReq(`${baseurl}/profile/user/${userId}`);
             console.log("the profile of user is: " , response);
+            setProfile(response.data);
         } catch (error) {
             setIsError(error);
             console.log("the error from the server is: " , error);
@@ -64,6 +65,10 @@ const ProfileProvider = ({children})=>{
             setIsLoading(false);
         }
     } , [userId , setIsError , setIsLoading]);
+
+    useEffect(()=>{
+        fetchProfile();
+    } , [fetchProfile]);
 
     //get all profiles 
     const fetchAllProfiles = useCallback(async()=>{
