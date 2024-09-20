@@ -7,12 +7,12 @@ const uploadOnCloudinary = require("../utils/cloudinary");
 //new Profile
 exports.newProfile = asyncHandler(async(req , res)=>{
     const {skills , education , contactInfo , gender , type , experience , user} = req.body
-    console.log("the request body is: " , skills , education , contactInfo , gender , type , experience , user);
+    // console.log("the request body is: " , skills , education , contactInfo , gender , type , experience , user);
     const parsedSkills = JSON.parse(skills);
     const parsedEducation = JSON.parse(education);
     const parsedContactInfo = JSON.parse(contactInfo);
     const parsedExperience = JSON.parse(experience);
-    console.log("Parsed Skills:", parsedSkills);
+    // console.log("Parsed Skills:", parsedSkills);
     if(!(parsedSkills && parsedEducation && parsedContactInfo && gender && type && parsedExperience && user)){
         throw new ApiError(400 , "all fields are required");
     }
