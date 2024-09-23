@@ -8,6 +8,7 @@ Router.route("/:JobPostId")
 .get(AuthMiddleware , PostJobController.getJobPost)
 .patch(AuthMiddleware , PostJobController.updateJobPost)
 .delete(AuthMiddleware , PostJobController.deleteJobPost);
+Router.route("/jobs/filter" , PostJobController.jobsByFilter);
 
 Router.route("/organization/:organizationId")
 .get(AuthMiddleware , PostJobController.getJobPost)

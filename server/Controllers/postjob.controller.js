@@ -59,6 +59,27 @@ exports.getAllJobPost = asyncHandler(async(req,res)=>{
     )
 })
 
+//find a job using filters
+exports.jobsByFilter = asyncHandler(async(req,res)=>{
+    const {location , salary , jobType} = req.query;
+    let query;
+    if(location){
+        query.location = location;
+    }
+    else if(salary){
+        query.salary = salary;
+    }else if(jobType){
+        query.jobType = jobType;
+    }
+    const jobs = await PostJob.find(query);
+    if(!jobs){
+        throw new ApiError(404 , "jobs are not found");
+    }
+    return res.status(200).json(
+        new ApiResponse("jobs are: " , jobs , 200)
+    )
+})
+
 //update JobPost
 exports.updateJobPost = asyncHandler(async(req,res)=>{
     const {role} = req.user;
