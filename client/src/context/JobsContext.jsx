@@ -15,6 +15,7 @@ const JobContext = createContext({
     deleteJob:()=>{},
     fetchJobsByFilters:()=>{},
     fetchJobsByOrganization:()=>{},
+    fetchJobById:()=>{},
     newJob:()=>{}
 })
 
@@ -40,12 +41,31 @@ const JobProvider = ({children})=>{
         try {
             setIsLoading(true);
             const response = await getndeleteReq(`${baseurl}/postJob` , "get");
-            console.log("response from Jobs context: " , response);
+            // console.log("response from Jobs context: " , response.data);
+            setJobs(response.data);
         } catch (error) {
             console.log("error from Jobs context: " , error);
             setIsError(error);
         }finally{
             setIsLoading(false);
+        }
+    } , [setIsError , setIsLoading]);
+    
+    //calling function for all jobs
+    useEffect(()=>{
+        fetchJobs();
+    } , [fetchJobs]);
+    
+    //get a job by id
+    const fetchJobById = useCallback(async (jobId) =>{
+        try {
+            setIsLoading(true);
+            const response = await getndeleteReq(`${baseurl}/postJob/jobs/${jobId}` , "get");
+            // console.log("the job from by id: " , response);
+            return await response.data;
+        } catch (error) {
+            setIsError(error);
+            console.log("error from Jobs context: " , error)
         }
     } , [setIsError , setIsLoading]);
 
@@ -108,7 +128,8 @@ const JobProvider = ({children})=>{
 
 
     return (
-        <JobContext.Provider value={{jobs , fetchJobs , updateJob , deleteJob , fetchJobsByFilters , newJob , fetchJobsByOrganization}}>
+        <JobContext.Provider value={{jobs , fetchJobs , updateJob , deleteJob , fetchJobsByFilters , newJob , 
+        fetchJobsByOrganization , fetchJobById}}>
             {children}
         </JobContext.Provider>
     )

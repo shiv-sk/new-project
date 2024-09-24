@@ -16,6 +16,9 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import { OrgProvider } from './context/OrganizationContext.jsx'
 import { ProfileProvider } from './context/ProfileContext.jsx'
+import Savejob from './pages/Savejob.jsx'
+import Applications from './pages/Applications.jsx'
+import { JobProvider } from './context/JobsContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -64,8 +67,16 @@ const router = createBrowserRouter([
         element:<Profile/>
       },
       {
-        path:"JobDetail",
+        path:"JobDetail/:jobId",
         element:<JobDetail/>
+      },
+      {
+        path:"savedjobs",
+        element:<Savejob/>
+      },
+      {
+        path:"application",
+        element:<Applications/>
       }
     ]
   },
@@ -85,11 +96,13 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <OrgProvider>
+        <JobProvider>
         <ProfileProvider>
       <RouterProvider router={router}>
         <App />
       </RouterProvider>
       </ProfileProvider>
+      </JobProvider>
       </OrgProvider>
     </AuthProvider>
   </StrictMode>,

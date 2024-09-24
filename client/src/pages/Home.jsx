@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
-import { useOrg } from "../context/OrganizationContext";
+import { useState } from "react"
+import {useJob} from "../context/JobsContext"
+import { Link } from "react-router-dom";
 
 export default function Home(){
     const [salary , setSalary] = useState(0);
@@ -7,11 +8,10 @@ export default function Home(){
         setSalary(e.target.value);
     }
     // console.log("the selected salary is: " , salary);
-    const {fetchOrganization} = useOrg();
-    useEffect(()=>{
-        fetchOrganization();
-    } , [fetchOrganization])
-     
+    
+    //fetching all jobs
+    const {jobs} = useJob(); 
+    console.log("all jobs from homepage: " , jobs);
     return (
         <section className="">
             {/* search---bar */}
@@ -48,21 +48,30 @@ export default function Home(){
                 </div>
                 </aside>
 
-                <div className="w-full md:w-2/4 flex justify-center mt-16 shadow-xl">
-                    <div className="border-2 w-full max-w-screen-sm max-h-56 px-6 py-4 bg-slate-700 rounded-md">
-                        <div className="w-full">
-                            <h5 className="text-lg font-bold mb-2">title of job</h5>
-                            <h6 className="text-sm mb-4">name of the organization</h6>
-                            {/* <div className="my-5 flex text-sm"> */}
-                                <span className="mr-2 my-4 mb-4">duration</span>
-                                <span className="mr-2 p-4 my-4 mb-4">location</span>
-                                <span className="mr-2 p-4 my-4 mb-4">type</span>
-                            {/* </div> */}
-                            <button className="bg-orange-500 hover:bg-orange-700 hover:transition-colors px-6 py-2 rounded-md block mt-6">
-                                More</button>
+                <div className="w-full md:w-2/4">
+                {
+                    jobs && jobs.length > 0 ? jobs.map((job)=>(
+                        <div className="w-full flex justify-center mt-16" key={job._id}>
+                            <div className="border-2 w-full max-w-screen-sm max-h-56 px-6 py-4 bg-slate-700 rounded-md">
+                                <div className="w-full">
+                                    <h5 className="text-lg font-bold mb-2">{job.title}</h5>
+                                    <h6 className="text-sm mb-4">name of the organization</h6>
+                                    {/* <div className="my-5 flex text-sm"> */}
+                                        <span className="mr-2 my-4 mb-4">{job.duration}</span>
+                                        <span className="mr-2 p-4 my-4 mb-4">{job.location}</span>
+                                        <span className="mr-2 p-4 my-4 mb-4">{job.salary}/month</span>
+                                    {/* </div> */}
+                                    <Link to={`/JobDetail/${job._id}`}
+                                    className="bg-orange-500 hover:bg-orange-700 hover:transition-colors px-6 py-2 
+                                    rounded-md block justify-center mt-6 w-20 text-center">More</Link>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    )) : ""
+                }
                 </div>
+                
+
             </div>
             {/* <slectA />   */}
             

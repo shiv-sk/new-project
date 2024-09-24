@@ -59,10 +59,21 @@ exports.getAllJobPost = asyncHandler(async(req,res)=>{
     )
 })
 
+exports.getJobById = asyncHandler(async(req,res)=>{
+    const {jobId} = req.params;
+    const job = await PostJob.findById(jobId).populate([{path:"organization" , select:"name logo"} , {path:"jobType" , select:"name"} , {path:"domain" , select:"name"}]);
+    if(!job){
+        throw new ApiError(404 , "there is no job: ");
+    }
+    return res.status(200).json(
+        new ApiResponse("the job is: " , job , 200)
+    )
+})
+
 //find a job using filters
 exports.jobsByFilter = asyncHandler(async(req,res)=>{
     const {location , salary , jobType} = req.query;
-    let query;
+    let query = {};
     if(location){
         query.location = location;
     }
